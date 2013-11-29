@@ -230,6 +230,7 @@ Kill all Ruby processes
 
     $ ps aux | grep ruby | awk '{ print $2 }' | xargs kill -9
     $ ps aux | awk '/ruby/ && ! /awk/ { system("kill -9 "$2) }'
+    $ pkill -9f ruby
 
 32 bits or 64 bits?
 
