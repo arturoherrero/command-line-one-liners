@@ -2,7 +2,7 @@
 
 After my blog post about [command line one-liners],
 many people want to contribute with their own commands.
-This is the place to do it, pull request are welcome!
+This is the place to do it, pull requests are welcome!
 
 
 Run the last command
@@ -167,7 +167,7 @@ Share a BIG file between two computers and show progress bar
     receiver $ nc -l 5566 > big-file.iso
     sender   $ pv big-file.iso | nc <receiver-ip-address> 5566
 
-Transfer a folder betwee two computers
+Transfer a folder between two computers
 
     receiver $ nc -l 5566 | tar -zxv
     sender   $ tar -zcv <a-folder> | nc -w1 <receiver-ip-address> 5566
