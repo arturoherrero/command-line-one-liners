@@ -104,10 +104,12 @@ Create simple text file from command line or script (EOF is just a token, can be
     {your text here}
     EOF
 
-Empty a file (usefull to truncate log file from running processes)
+Empty a file from command line (usefull to truncate log file from running processes)
 
     $ > file.txt
-    # from inside script
+
+Empty a file from command line or script
+
     $ cat /dev/null > file.txt
 
 Show PATH in a human-readable way
@@ -170,7 +172,7 @@ Share a BIG file between two computers and show progress bar
 Transfer a folder between two computers
 
     receiver $ nc -l 5566 | tar -zxv
-    sender   $ tar -zcv <a-folder> | nc -w1 <receiver-ip-address> 5566
+    sender   $ tar -zcv <folder> | nc -w1 <receiver-ip-address> 5566
 
 Create an ISO image from a directory
 
@@ -222,9 +224,9 @@ Check which process is listening on a specific port
 
 Check which process is modifying a certain directory or file
 
-    $ auditctl -w /a/directory -p war
+    $ auditctl -w /path/to/directory -p war
     # see results with:
-    $ ausearch -f /a/directory
+    $ ausearch -f /path/to/directory
 
 Currently mounted filesystems in nice layout
 
@@ -279,7 +281,7 @@ What day is today?
     $ cal | sed "s/.*/ & /;s/ $(date +%d) / [] /"
     $ cal | sed "s/.*/ & /;s/ $(date +%d) / $(printf '\e[0;31m[]\e[0m') /"
 
-What date was it yesterday or will it be tomorrow etc
+What date was it yesterday or will it be tomorrow, etc...
 
     $ date -d yesterday
     $ date -d tomorrow +%Y-%m-%d
