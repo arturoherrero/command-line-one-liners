@@ -220,7 +220,8 @@ List programs with open ports and connections
 
 Check which process is listening on a specific port
 
-    $ sudo netstat -nlp | grep 8080
+    $ netstat -nlp | grep 8080
+    $ netstat -nlp tcp | grep 8080 (BSD)
 
 Check which process is modifying a certain directory or file
 
@@ -286,6 +287,7 @@ What date was it yesterday or will it be tomorrow, etc...
     $ date -d yesterday
     $ date -d tomorrow +%Y-%m-%d
     $ date -d "7 days ago" +%Y-%m-%d
+    $ date -j -v-1d (BSD)
 
 Show File System Hierarchy
 
