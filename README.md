@@ -97,9 +97,18 @@ Create simple text file from command line
     {your text here}
     <ctrl-d>
 
-Empty a file
+Create simple text file from command line or script (EOF is just a token, can be any word)
+
+    $ cat > file.txt << EOF
+    {your text here}
+    {your text here}
+    EOF
+
+Empty a file (usefull to truncate log file from running processes)
 
     $ > file.txt
+    # from inside script
+    $ cat /dev/null > file.txt
 
 Show PATH in a human-readable way
 
@@ -150,8 +159,22 @@ Serve current directory tree at http://$HOSTNAME:8000/
 
 Share a file between two computers
 
-    $ nc -l 5566 > data-dump.sql
-    $ nc <his-ip-address> 5566 < data-dump.sql
+    receiver $ nc -l 5566 > data-dump.sql
+    sender   $ nc <receiver-ip-address> 5566 < data-dump.sql
+
+Share a BIG file between two computers and show progress bar
+
+    receiver $ nc -l 5566 > big-file.iso
+    sender   $ pv big-file.iso | nc <receiver-ip-address> 5566
+
+Transfer a folder betwee two computers
+
+    receiver $ nc -l 5566 | tar -zxv
+    sender   $ tar -zcv <a-folder> | nc -w1 <receiver-ip-address> 5566
+
+Create an ISO image from a directory
+
+    $ mkisofs -o my-backup.iso /a/directory/
 
 Download an entire website
 
@@ -193,6 +216,16 @@ List programs with open ports and connections
 
     $ lsof -i
 
+Check which process is listening on a specific port
+
+    $ sudo netstat -nlp | grep 8080
+
+Check which process is modifying a certain directory or file
+
+    $ auditctl -w /a/directory -p war
+    # see results with:
+    $ ausearch -f /a/directory
+
 Currently mounted filesystems in nice layout
 
     $ mount | column -t
@@ -231,6 +264,7 @@ Kill all Ruby processes
     $ ps aux | grep ruby | awk '{ print $2 }' | xargs kill -9
     $ ps aux | awk '/ruby/ && ! /awk/ { system("kill -9 "$2) }'
     $ pkill -f ruby
+    $ killall -9 ruby
 
 32 bits or 64 bits?
 
@@ -244,6 +278,12 @@ What day is today?
 
     $ cal | sed "s/.*/ & /;s/ $(date +%d) / [] /"
     $ cal | sed "s/.*/ & /;s/ $(date +%d) / $(printf '\e[0;31m[]\e[0m') /"
+
+What date was it yesterday or will it be tomorrow etc
+
+    $ date -d yesterday
+    $ date -d tomorrow +%Y-%m-%d
+    $ date -d "7 days ago" +%Y-%m-%d
 
 Show File System Hierarchy
 
