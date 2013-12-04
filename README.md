@@ -299,7 +299,7 @@ Quick access to the ascii table
 
 Russian Roulette in Bash
 
-    $ [ $[ $RANDOM % 6 ] == 0 ] && rm -rf / || echo "You live"
+    $ [ $[ $RANDOM % 6 ] == 0 ] && echo "You die" || echo "You live"
 
 Watch Star Wars via telnet
 
