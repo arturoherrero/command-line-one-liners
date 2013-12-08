@@ -245,6 +245,14 @@ Display 10 biggest files/folders for the current directory
 
     $ du -s * | sort -nr | head
 
+Create a zip archive of a directory
+
+    $ zip -r archive.zip directory
+
+Extract compressed archive
+
+    $ unzip archive.zip
+
 Execute a command at a given time
 
     $ echo "ls -l" | at midnight
