@@ -305,6 +305,11 @@ Quick access to the ascii table
 
     $ man ascii
 
+Shutdown the system at a given time
+
+    $ shutdown -h now
+    $ shutdown -h 22:49
+
 Russian Roulette in Bash
 
     $ [ $[ $RANDOM % 6 ] == 0 ] && echo "You die" || echo "You live"
