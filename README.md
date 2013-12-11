@@ -32,6 +32,7 @@ Insert the last argument of the previous command
 
     $ cp script.sh /usr/bin/
     $ cd <ESC> .
+    $ cd <ALT> .
 
 Runs previous command but replacing
 
@@ -66,6 +67,10 @@ Search the history for the most recent command beginning with 'text'
 
     $ !text
 
+Search the history for the most recent command containing 'text'
+
+    $ <ctrl-r>text
+
 List of commands you use most often
 
     $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head
@@ -86,7 +91,7 @@ Change to the previous working directory
 
     $ cd -
 
-Jump to a directory. Execute a command. Jump back to current directory
+Jump to a directory. Execute a command in a subshell. Jump back to current directory
 
     $ (cd /tmp && ls)
 
@@ -232,6 +237,10 @@ Check which process is modifying a certain directory or file
 Currently mounted filesystems in nice layout
 
     $ mount | column -t
+
+Hierarchy of available block devices
+
+    $ lsblk
 
 Display free disk space
 
