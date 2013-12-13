@@ -50,7 +50,6 @@ Run the last command with some argument
     $ echo !!:2
     $ echo !!:3-$
 
-Insert the last argument of the previous command
 <!--
 Insert the last argument of the previous command
 -->
@@ -58,6 +57,7 @@ Insert the last argument of the previous command
 
     $ cp script.sh /usr/bin/
     $ cd <ESC> .
+    $ cd <ALT> .
 
 <!--
 Runs previous command but replacing
@@ -111,6 +111,13 @@ Search the history for the most recent command beginning with 'text'
     $ !text
 
 <!--
+Search the history for the most recent command containing 'text'
+-->
+履歴から 'text' を含む直近のコマンドを検索する
+
+    $ <ctrl-r>text
+
+<!--
 List of commands you use most often
 -->
 利用頻度の高いコマンド一覧を表示する
@@ -146,9 +153,9 @@ Change to the previous working directory
     $ cd -
 
 <!--
-Jump to a directory. Execute a command. Jump back to current directory
+Jump to a directory. Execute a command in a subshell. Jump back to current directory
 -->
-ディレクトリを移動して実行し、元のディレクトリに戻る
+ディレクトリを移動してサブシェル内でコマンドを実行し、元のディレクトリに戻る
 
     $ (cd /tmp && ls)
 
@@ -383,6 +390,13 @@ Currently mounted filesystems in nice layout
     $ mount | column -t
 
 <!--
+Hierarchy of available block devices
+-->
+利用可能なブロックデバイスの階層を表示する
+
+    $ lsblk
+
+<!--
 Display free disk space
 -->
 ディスクの空き容量を表示する
@@ -402,6 +416,20 @@ Display 10 biggest files/folders for the current directory
 カレントディレクトリのファイル/フォルダーを容量順に上位 10 件を表示する
 
     $ du -s * | sort -nr | head
+
+<!--
+Create a zip archive of a directory
+-->
+ディレクトリの zip アーカイブを作成する
+
+    $ zip -r archive.zip directory
+
+<!--
+Extract compressed archive
+-->
+圧縮アーカイブを展開する
+
+    $ unzip archive.zip
 
 <!--
 Execute a command at a given time
@@ -487,6 +515,14 @@ Quick access to the ascii table
 手早くアスキーコード一覧を表示
 
     $ man ascii
+
+<!--
+Shutdown the system at a given time
+-->
+指定した時間にシャットダウンする
+
+    $ shutdown -h now
+    $ shutdown -h 22:49
 
 <!--
 Russian Roulette in Bash
