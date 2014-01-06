@@ -56,6 +56,7 @@ Insert the last argument of the previous command
 直前のコマンドの最後の引数を挿入する
 
     $ cp script.sh /usr/bin/
+    $ cd !$
     $ cd <ESC> .
     $ cd <ALT> .
 
