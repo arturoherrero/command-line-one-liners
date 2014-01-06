@@ -31,6 +31,7 @@ Run the last command with some argument
 Insert the last argument of the previous command
 
     $ cp script.sh /usr/bin/
+    $ cd !$
     $ cd <ESC> .
     $ cd <ALT> .
 
