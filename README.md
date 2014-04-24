@@ -127,6 +127,11 @@ Make 'less' behave like 'tail -f'
 
     $ less +F somelogfile
 
+Display line numbers in a file
+
+    $ cat -n file
+    $ less -N file
+
 Redirect standard input to a file. Print it to standard output
 
     $ command | tee file.txt | less
