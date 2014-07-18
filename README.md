@@ -169,6 +169,7 @@ Count your commits
 Serve current directory tree at http://$HOSTNAME:8000/
 
     $ python -m SimpleHTTPServer
+    $ ruby -run -e httpd . -p 8000
 
 Share a file between two computers
 
