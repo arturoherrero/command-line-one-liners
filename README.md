@@ -1,140 +1,208 @@
-## Command line one-liners
+# Command line one-liners
 
-After my blog post about [command line one-liners],
-many people want to contribute with their own commands.
-This is the place to do it, pull requests are welcome!
+After my article about [command line one-liners][1], many people want to
+contribute with their own commands. This is the place to do it, pull requests
+are welcome!
 
+## Table of Contents
 
-Run the last command
+- [History](#history)
+- [Directories](#directories)
+- [Files](#files)
+- [Searching](#searching)
+- [Networking](#networking)
+- [User environment](#user-environment)
+- [File system](#file-system)
+- [Date & Time](#date--time)
+- [Processes](#processes)
+- [Miscellaneous](#miscellaneous)
 
-    $ !!
+- - -
 
-Run the last command as root
+### History
 
-    $ sudo !!
+- Run the last command
 
-Create a script of the last executed command
+  ```
+  $ !!
+  ```
 
-    $ echo "!!" > script.sh
+- Run the last command as root
 
-Reuse all parameter of the previous command line
+  ```
+  $ sudo !!
+  ```
 
-    $ echo cd .
-    $ !*
+- Create a script of the last executed command
 
-Run the last command with some argument
+  ```
+  $ echo "!!" > script.sh
+  ```
 
-    $ echo a b c d e
-    $ echo !!:2
-    $ echo !!:3-$
+- Reuse all parameter of the previous command line
 
-Insert the last argument of the previous command
+  ```
+  $ echo cd .
+  $ !*
+  ```
 
-    $ cp script.sh /usr/bin/
-    $ cd !$
-    $ cd <ESC> .
-    $ cd <ALT> .
+- Run the last command with some argument
 
-Runs previous command but replacing
+  ```
+  $ echo a b c d e
+  $ echo !!:2
+  $ echo !!:3-$
+  ```
 
-    $ echo no typos
-    $ ^typos^errors
+- Insert the last argument of the previous command
 
-Escape any command aliases
+  ```
+  $ cp script.sh /usr/bin/
+  $ cd !$
+  $ cd <ESC> .
+  $ cd <ALT> .
+  ```
 
-    $ alias ls="ls -a"
-    $ \ls
+- Runs previous command but replacing
 
-Quickly rename a file
+  ```
+  $ echo no typos
+  $ ^typos^errors
+  ```
 
-    $ mv filename.{old,new}
-    $ mv filename.{png,jpg}
+- Escape any command aliases
 
-Create a quick back-up copy of a file
+  ```
+  $ alias ls="ls -a"
+  $ \ls
+  ```
 
-    $ cp file.txt{,.bak}
+- Run a command from the history
 
-Run a command from the history
-
-    $ history
+  ```
+  $ history
      ...
      1225  ls -l
      1226  git status
      1227  history
-    $ !-3
-    $ !1225
+  $ !-3
+  $ !1225
+  ```
 
-Search the history for the most recent command beginning with 'text'
+- Search the history for the most recent command beginning with `text`
 
-    $ !text
+  ```
+  $ !text
+  ```
 
-Search the history for the most recent command containing 'text'
+- Search the history for the most recent command containing `text`
 
-    $ <ctrl-r>text
+  ```
+  $ <ctrl-r>text
+  ```
 
-List of commands you use most often
+- List of commands you use most often
 
-    $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+  ```
+  $ history | awk '{print $2}' | sort | uniq -c | sort -rn | head
+  ```
 
-Execute a command without saving it in the history
+- Execute a command without saving it in the history
 
-    $ <space>command
+  ```
+  $ <space>command
+  ```
 
-Make directory including intermediate directories
 
-    $ mkdir -p a/long/directory/path
+### Directories
 
-Create a directory and change into it
+- Make a directory creating intermediate directories
 
-    $ mkdir dir && cd $_
+  ```
+  $ mkdir -p a/long/directory/path
+  ```
 
-Change to the previous working directory
+- Create a directory and change into it
 
-    $ cd -
+  ```
+  $ mkdir dir && cd $_
+  ```
 
-Jump to a directory. Execute a command in a subshell. Jump back to current directory
+- Change to the previous working directory
 
-    $ (cd /tmp && ls)
+  ```
+  $ cd -
+  ```
 
-Create simple text file from command line
+- Jump to a directory. Execute a command in a subshell. Jump back to current directory
 
-    $ cat > file.txt
-    {your text here}
-    {your text here}
-    <ctrl-d>
+  ```
+  $ (cd /tmp && ls)
+  ```
 
-Create simple text file from command line or script (EOF is just a token, can be any word)
 
-    $ cat > file.txt << EOF
-    {your text here}
-    {your text here}
-    EOF
+### Files
 
-Empty a file from command line (usefull to truncate log file from running processes)
+- Quickly rename a file
 
-    $ > file.txt
+  ```
+  $ mv filename.{old,new}
+  $ mv filename.{png,jpg}
+  ```
 
-Empty a file from command line or script
+- Create a quick back-up copy of a file
 
-    $ cat /dev/null > file.txt
+  ```
+  $ cp file.txt{,.bak}
+  ```
 
-Show PATH in a human-readable way
+- Create a simple text file from command line
 
-    $ echo $PATH | tr ':' '\n'
-    $ tr ':' '\n' <<< $PATH
+  ```
+  $ cat > file.txt
+  {your text here}
+  {your text here}
+  <ctrl-d>
+  ```
 
-Make 'less' behave like 'tail -f'
+- Create a simple text file from command line or script (`EOF` is just a token, can be any word)
 
-    $ less +F somelogfile
+  ```
+  $ cat > file.txt << EOF
+  {your text here}
+  {your text here}
+  EOF
+  ```
 
-Display line numbers in a file
+- Empty a file from command line (usefull to truncate log file from running processes)
 
-    $ cat -n file
-    $ less -N file
+  ```
+  $ > file.txt
+  ```
 
-Redirect standard input to a file. Print it to standard output
+- Empty a file from command line or script
 
-    $ command | tee file.txt | less
+  ```
+  $ cat /dev/null > file.txt
+  ```
+
+- Make `less` behave like `tail -f`
+
+  ```
+  $ less +F somelogfile
+  ```
+
+- Display line numbers in a file
+
+  ```
+  $ cat -n file
+  $ less -N file
+  ```
+
+- Redirect standard input to a file. Print it to standard output
+
+  ```
+  $ command | tee file.txt | less
 
     ┌─────────┐  ┌─────────┐  ┌─────────┐
     │ command │─▸│   tee   │─▸│ stdout  │
@@ -144,195 +212,297 @@ Redirect standard input to a file. Print it to standard output
                 ┌───────────┐
                 │   file    │
                 └───────────┘
+  ```
 
-Search for a <pattern> string inside all files in the current directory
 
-    $ grep -RnsI --color=auto <pattern> *
+### Searching
 
-Beyond grep
+- Search for a <pattern> string inside all files in the current directory
 
+  ```
+  $ grep -RnsI --color=auto <pattern> *
+  ```
+
+- Beyond grep
+
+  ```
     _   /|
     \'o.O'
     =(___)=
       U    ack!
 
-    $ ack <pattern>
+  $ ack <pattern>
+  ```
 
-Recursively remove all empty directories
+- Recursively remove all empty directories
 
-    $ find . -type d -empty -delete
+  ```
+  $ find . -type d -empty -delete
+  ```
 
-Count your commits
 
-    $ git shortlog -sn
+### Networking
 
-Serve current directory tree at http://$HOSTNAME:8000/
+- Serve current directory tree at `http://$HOSTNAME:8000/`
 
-    $ python -m SimpleHTTPServer
-    $ ruby -run -e httpd . -p 8000
+  ```
+  $ python -m SimpleHTTPServer
+  $ ruby -run -e httpd . -p 8000
+  ```
 
-Share a file between two computers
+- Share a file between two computers
 
-    receiver $ nc -l 5566 > data-dump.sql
-    sender   $ nc <receiver-ip-address> 5566 < data-dump.sql
+  ```
+  receiver $ nc -l 5566 > data-dump.sql
+  sender   $ nc <receiver-ip-address> 5566 < data-dump.sql
+  ```
 
-Share a BIG file between two computers and show progress bar
+- Share a BIG file between two computers and show progress bar
 
-    receiver $ nc -l 5566 > big-file.iso
-    sender   $ pv big-file.iso | nc <receiver-ip-address> 5566
+  ```
+  receiver $ nc -l 5566 > big-file.iso
+  sender   $ pv big-file.iso | nc <receiver-ip-address> 5566
+  ```
 
-Transfer a folder between two computers
+- Transfer a folder between two computers
 
-    receiver $ nc -l 5566 | tar -zxv
-    sender   $ tar -zcv <folder> | nc -w1 <receiver-ip-address> 5566
+  ```
+  receiver $ nc -l 5566 | tar -zxv
+  sender   $ tar -zcv <folder> | nc -w1 <receiver-ip-address> 5566
+  ```
 
-Create an ISO image from a directory
+- Download an entire website
 
-    $ mkisofs -o my-backup.iso /a/directory/
+  ```
+  $ wget -m http://website.com
+  ```
 
-Download an entire website
 
-    $ wget -m http://website.com
+### User environment
 
-Clear the terminal screen
+- Show `PATH` in a human-readable way
 
-    <ctrl-l>
+  ```
+  $ echo $PATH | tr ':' '\n'
+  $ tr ':' '\n' <<< $PATH
+  ```
 
-Salvage a borked terminal
+- Clear the terminal screen
 
-    $ reset
+  ```
+  $ <ctrl-l>
+  $ clear
+  ```
 
-Close shell keeping all subprocess running
+- Salvage a borked terminal
 
-    $ disown -a && exit
+  ```
+  $ reset
+  ```
 
-Run a command immune to hangups
+- Close shell keeping all subprocess running
 
-    $ nohup command &
+  ```
+  $ disown -a && exit
+  ```
 
-Attach screen over ssh
+- Run a command immune to hangups
 
-    $ ssh user@host -t screen -r
+  ```
+  $ nohup command &
+  ```
 
-Compare a remote file with a local file
 
-    $ ssh user@host cat /path/to/remotefile | diff /path/to/localfile -
+### Networking
 
-Get your public IP address
+- Attach screen over ssh
 
-    $ curl ifconfig.me
+  ```
+  $ ssh user@host -t screen -r
+  ```
 
-Set audible alarm when an IP address comes online
+- Compare a remote file with a local file
 
-    $ ping -a IP_address
+  ```
+  $ ssh user@host cat /path/to/remotefile | diff /path/to/localfile -
+  ```
 
-List programs with open ports and connections
+- Get your public IP address
 
-    $ lsof -i
+  ```
+  $ curl ifconfig.me
+  ```
 
-Check which process is listening on a specific port
+- Set audible alarm when an IP address comes online
 
-    $ netstat -nlp | grep 8080
-    $ netstat -nlp tcp | grep 8080 (BSD)
+  ```
+  $ ping -a IP_address
+  ```
 
-Check which process is modifying a certain directory or file
+- List programs with open ports and connections
 
-    $ auditctl -w /path/to/directory -p war
-    # see results with:
-    $ ausearch -f /path/to/directory
+  ```
+  $ lsof -i
+  ```
 
-Currently mounted filesystems in nice layout
+- Check which process is listening on a specific port
 
-    $ mount | column -t
+  ```
+  $ netstat -nlp | grep 8080
+  $ netstat -nlp tcp | grep 8080 (BSD)
+  ```
 
-Hierarchy of available block devices
 
-    $ lsblk
+### File system
 
-Display free disk space
+- Currently mounted filesystems in nice layout
 
-    $ df -h
+  ```
+  $ mount | column -t
+  ```
 
-Display disk usage statistics for the current directory
+- Display free disk space
 
-    $ du -sh *
+  ```
+  $ df -h
+  ```
 
-Display 10 biggest files/folders for the current directory
+- Display disk usage statistics for the current directory
 
-    $ du -s * | sort -nr | head
+  ```
+  $ du -sh *
+  ```
 
-Create a zip archive of a directory
+- Display 10 biggest files/folders for the current directory
 
-    $ zip -r archive.zip directory
+  ```
+  $ du -s * | sort -nr | head
+  ```
 
-Extract compressed archive
+- Create a zip archive of a directory
 
-    $ unzip archive.zip
+  ```
+  $ zip -r archive.zip directory
+  ```
 
-Execute a command at a given time
+- Extract compressed archive
 
-    $ echo "ls -l" | at midnight
+  ```
+  $ unzip archive.zip
+  ```
 
-Simple stopwatch
+- Show File System Hierarchy
 
-    $ time read
-    <ctrl-d>
+  ```
+  $ man hier
+  ```
 
-Put a console clock in top right corner
 
-    $ while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &
+### Date & Time
 
-Display the top ten running processes. (Sorted by memory usage)
+- Shutdown the system at a given time
 
-    $ ps aux | sort -nk +4 | tail
+  ```
+  $ shutdown -h now
+  $ shutdown -h 22:49
+  ```
 
-Kill all Ruby processes
+- Execute a command at a given time
 
-    $ ps aux | grep ruby | awk '{ print $2 }' | xargs kill -9
-    $ ps aux | awk '/ruby/ && ! /awk/ { system("kill -9 "$2) }'
-    $ pkill -f ruby
-    $ killall -9 ruby
+  ```
+  $ echo "ls -l" | at midnight
+  ```
 
-32 bits or 64 bits?
+- Simple stopwatch
 
-    $ getconf LONG_BIT
+  ```
+  $ time read
+  <ctrl-d>
+  ```
 
-Displays a calendar
+- Put a console clock in top right corner
 
-    $ cal 12 1984
+  ```
+  $ while sleep 1;do tput sc;tput cup 0 $(($(tput cols)-29));date;tput rc;done &
+  ```
 
-What day is today?
+- Displays a calendar
 
-    $ cal | sed "s/.*/ & /;s/ $(date +%d) / [] /"
-    $ cal | sed "s/.*/ & /;s/ $(date +%d) / $(printf '\e[0;31m[]\e[0m') /"
+  ```
+  $ cal 12 1984
+  ```
 
-What date was it yesterday or will it be tomorrow, etc...
+- What date was it yesterday or will it be tomorrow, etc...
 
-    $ date -d yesterday
-    $ date -d tomorrow +%Y-%m-%d
-    $ date -d "7 days ago" +%Y-%m-%d
-    $ date -j -v-1d (BSD)
+  ```
+  $ date -d yesterday
+  $ date -d tomorrow +%Y-%m-%d
+  $ date -d "7 days ago" +%Y-%m-%d
+  $ date -j -v-1d (BSD)
+  ```
 
-Show File System Hierarchy
 
-    $ man hier
+### Processes
 
-Quick access to the ascii table
+- Display the top ten running processes. (Sorted by memory usage)
 
-    $ man ascii
+  ```
+  $ ps aux | sort -nk +4 | tail
+  ```
 
-Shutdown the system at a given time
+- Kill all Ruby processes
 
-    $ shutdown -h now
-    $ shutdown -h 22:49
+  ```
+  $ ps aux | grep ruby | awk '{ print $2 }' | xargs kill -9
+  $ ps aux | awk '/ruby/ && ! /awk/ { system("kill -9 "$2) }'
+  $ pkill -f ruby
+  $ killall -9 ruby
+  ```
 
-Russian Roulette in Bash
+- Check which process is modifying a certain directory or file
 
-    $ [ $[ $RANDOM % 6 ] == 0 ] && echo "You die" || echo "You live"
+  ```
+  $ auditctl -w /path/to/directory -p war
+  ```
 
-Watch Star Wars via telnet
+  See results
 
-    $ telnet towel.blinkenlights.nl
+  ```
+  $ ausearch -f /path/to/directory
+  ```
 
 
-[command line one-liners]: http://arturoherrero.com/2013/11/29/command-line-one-liners/
+### Miscellaneous
+
+- 32 bits or 64 bits?
+
+  ```
+  $ getconf LONG_BIT
+  ```
+
+- Quick access to the ascii table
+
+  ```
+  $ man ascii
+  ```
+
+- Count your commits
+
+  ```
+  $ git shortlog -sn
+  ```
+
+- Russian Roulette in Bash (remember kids don't try this at home)
+
+  ```
+  $ [ $[ $RANDOM % 6 ] == 0 ] && rm -rf / || echo "You live"
+  ```
+
+- Watch Star Wars via telnet
+
+  ```
+  $ telnet towel.blinkenlights.nl
+  ```
+
+
+[1]: http://arturoherrero.com/command-line-one-liners/
