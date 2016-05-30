@@ -432,7 +432,7 @@ are welcome!
   $ cal 12 1984
   ```
 
-- What date was it yesterday or will it be tomorrow, etc...
+- What day was yesterday or will it be tomorrow, etc...
 
   ```
   $ date -d yesterday
@@ -505,4 +505,11 @@ are welcome!
   ```
 
 
+## Who made this?
+
+This was made by Arturo Herrero under the MIT License. Find me on Twitter
+[@ArturoHerrero][2].
+
+
 [1]: http://arturoherrero.com/command-line-one-liners/
+[2]: https://twitter.com/ArturoHerrero
