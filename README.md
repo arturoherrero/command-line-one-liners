@@ -274,9 +274,8 @@ are welcome!
 - Download an entire website
 
   ```
-  $ wget -m http://website.com
+  $ wget -m -k http://website.com
   ```
-
 
 ### User environment
 
